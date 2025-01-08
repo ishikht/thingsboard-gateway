@@ -16,6 +16,7 @@
 set -e # exit on any error
 
 # Fetch the current branch name and latest commit ID
+REPO_NAME="ishikht/tb-gateway"
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD | sed 's/[\/]/-/g')
 COMMIT_ID=$(git rev-parse --short HEAD)
 
@@ -27,7 +28,12 @@ set -x
 
 # multi arch
  DOCKER_CLI_EXPERIMENTAL=enabled \
- docker buildx build . -t tb-gateway:$VERSION_TAG -f docker/Dockerfile --platform=linux/amd64,linux/arm64 -o type=registry
+ docker buildx build . \
+  -t "${REPO_NAME}:${VERSION_TAG}" \
+  -t "${REPO_NAME}:latest" \
+  -f docker/Dockerfile \
+  --platform=linux/amd64,linux/arm64 \
+  --push
 
 set +x
 echo "$(date) Done."
