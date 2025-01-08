@@ -16,9 +16,10 @@
 set -e # exit on any error
 
 # Fetch the current branch name and latest commit ID
-REPO_NAME="ishikht/tb-gateway"
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD | sed 's/[\/]/-/g')
 COMMIT_ID=$(git rev-parse --short HEAD)
+
+REPO_NAME="ishikht/tb-gateway"
 
 # Combine them to create a version tag
 VERSION_TAG="${BRANCH_NAME}-${COMMIT_ID}"
