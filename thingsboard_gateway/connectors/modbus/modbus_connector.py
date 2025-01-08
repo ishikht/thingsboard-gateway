@@ -254,7 +254,7 @@ class AsyncModbusConnector(Connector, Thread):
                 self.__log.error('Timeout error for device %s', slave)
             except Exception as e:
                 self.__delete_device_from_platform(slave)
-                self.__log.error('Failed to poll %s device: %s', slave, exc_info=e)
+                self.__log.error('Failed to poll %s device: %s', slave, e, exc_info=e)
         else:
             self.__log.debug('Config is empty. Nothing to read, for device %s', slave)
 
