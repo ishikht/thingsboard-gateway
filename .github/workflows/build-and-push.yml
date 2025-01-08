@@ -1,6 +1,9 @@
 name: Build and Push ThingsBoard Gateway
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
 
 jobs:
