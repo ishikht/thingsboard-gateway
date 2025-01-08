@@ -52,7 +52,7 @@ For processing data from devices you also can write custom converter, it will re
  - [GitHub discussions](https://github.com/thingsboard/thingsboard-gateway/discussions)
  - [Stackoverflow](http://stackoverflow.com/questions/tagged/thingsboard-gateway)
  
-**Don't forget to star the repository to show your ❤️ and support...**
+**Don't forget to star the repository to show your ❤️ and support.**
 
 ## Licenses
 
