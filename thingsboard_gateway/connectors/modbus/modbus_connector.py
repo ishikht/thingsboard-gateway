@@ -181,22 +181,20 @@ class AsyncModbusConnector(Connector, Thread):
         self.__server.start()
 
     def __get_master(self, slave: Slave):
-        """
-        Method check if connection to master already exists and return it
-        or create new connection and return it
-
-        Newly created master connection structure will look like:
-        self._master_connections = {
-            '127.0.0.1:5021': AsyncClient object
-        }
-        """
-
-        socket_str = slave.host + ':' + str(slave.port)
+        # For serial: create a unique socket_str that doesn't rely on slave.host
+        if slave.type == "serial":
+            socket_str = f"serial:{slave.port}"        # e.g. "serial:/dev/ttyS0"
+        else:
+            socket_str = f"{slave.host}:{slave.port}"  # e.g. "192.168.1.100:502"
+    
         if socket_str not in self._master_connections:
             master_connection = Master.configure_master(slave)
+            if not master_connection:
+                self.__log.error("Failed to configure master for slave %s", slave)
+                return None
             master = Master(slave.type, master_connection)
             self._master_connections[socket_str] = master
-
+    
         return self._master_connections[socket_str]
 
     def __add_slave(self, slave_config):
