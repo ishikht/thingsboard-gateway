@@ -2,6 +2,7 @@ name: Build and Push ThingsBoard Gateway
 
 on:
   push:
+    branches: ["master"]
     tags:
       - "v*"
   workflow_dispatch:
